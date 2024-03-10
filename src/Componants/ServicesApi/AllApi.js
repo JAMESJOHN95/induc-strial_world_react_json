@@ -10,7 +10,10 @@ export const getImageApi = async ()=>{
 
 }
 export const uploadenquiryApi = async (enquiry)=>{
-    return await commonApi("POST",`${Server_Api}/Enquiry`,enquiry)}
+    try{return await commonApi("POST",`${Server_Api}/Enquiry`,enquiry)}
+catch{
+    console.error("Error uploading enquiry:", error)
+}}
 
     export const getEnquiryApi = async ()=>{
         return await commonApi("GET",`${Server_Api}/Enquiry`,"")}

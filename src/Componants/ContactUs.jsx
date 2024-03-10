@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { uploadenquiryApi } from './ServicesApi/AllApi'
-import commonApi from './ServicesApi/CommonApi'
 
 function ContactUs() {
 
 const [uploadEnquiry,stuploadEnquiry] = useState({Name:"",Email:"",phone:"",Enquiry:""})
 
-const handleupload = async()=>{
+const handleupload = async(e)=>{
+  e.preventDefault();
+
    const {Name,Email,phone,Enquiry} = uploadEnquiry
   if(Name && Email && phone && Enquiry) {
     const result = await uploadenquiryApi(uploadEnquiry)
@@ -18,7 +19,9 @@ console.log(result);
   }
 
 }
-
+useEffect(()=>{
+// uploadEnquiry()
+},[])
 
   return (
     <>
@@ -35,7 +38,7 @@ console.log(result);
                 <label htmlFor="">Enquiry</label>
                 <textarea value={uploadEnquiry.Enquiry}onChange={e=>stuploadEnquiry({...uploadEnquiry,Enquiry:e.target.value})} className='form-contro rounded border-1' type="text" /> <br />
 
-                <div style={{textAlign:'center'}} ><button onClick={handleupload} className='btn btn-primary'>Sumbit</button></div>
+                <div style={{textAlign:'center'}} ><button onClick={(e)=>handleupload(e)} className='btn btn-primary'>Sumbit</button></div>
             </div>
         </form>
        
